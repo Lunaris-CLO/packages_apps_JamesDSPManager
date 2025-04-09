@@ -14,9 +14,14 @@
 
 BUILD_PATH := packages/apps/JamesDSPManager
 
-PRODUCT_COPY_FILES += \
-    $(call find-copy-subdir-files,*,$(BUILD_PATH)/vendor,vendor) \
-    $(BUILD_PATH)/permissions/privapp-permissions-james.dsp.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/privapp-permissions-james.dsp.xml
+# Soong Namespace
+PRODUCT_SOONG_NAMESPACES += \
+   $(BUILD_PATH)
+
+# SEPolicy
+BOARD_VENDOR_SEPOLICY_DIRS += $(BUILD_PATH)/sepolicy/vendor
 
 PRODUCT_PACKAGES += \
-    JamesDSPManager
+    JamesDSPManager \
+    libjamesdsp \
+    privapp-permissions-james.dsp.xml
